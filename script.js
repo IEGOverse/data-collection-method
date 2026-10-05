@@ -262,9 +262,9 @@
     2: {
       icon: 'i-users',
       title: 'Peserta dipilih',
-      sub: 'Supaya hasil dapat mewakili pengguna sasaran',
+      sub: 'Supaya mewakili pengguna dewasa yang menyetir',
       durasi: 'Seleksi: tidak ada durasi tetap. Briefing: 5 menit per peserta.',
-      instruksi: 'Pilih peserta yang mewakili pengguna sasaran dan dapat menilai konsisten.',
+      instruksi: 'Rutin menyetir sendiri, mampu duduk 5 menit, belum pernah mencoba 10 kursi ini.',
       catatan: 'Jumlah peserta · briefing jelaskan skala 1–10'
     },
     3: {
