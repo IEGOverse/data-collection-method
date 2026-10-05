@@ -255,23 +255,23 @@
       icon: 'i-seat',
       title: 'Siapkan 10 desain kursi',
       sub: 'Supaya setiap kursi dapat diidentifikasi dan dibandingkan',
-      durasi: 'Sekali di awal sesi',
+      durasi: 'Sekitar 5 menit',
       instruksi: 'Beri nomor 1 sampai dengan 10 dan letakkan pada posisi yang sama.',
       catatan: 'Nomor urut desain kursi'
     },
     2: {
       icon: 'i-users',
       title: 'Peserta dipilih',
-      sub: 'Supaya semua peserta menilai dengan kriteria yang sama',
-      durasi: 'Sekitar 5 menit per peserta',
-      instruksi: 'Sampaikan bahwa nilai 1 sampai 10 bersifat pribadi dan tidak ada jawaban benar atau salah.',
-      catatan: 'Jumlah peserta yang mengikuti'
+      sub: 'Supaya hasil dapat mewakili pengguna sasaran',
+      durasi: 'Seleksi: tidak ada durasi tetap. Briefing: 5 menit per peserta.',
+      instruksi: 'Pilih peserta yang mewakili pengguna sasaran dan dapat menilai konsisten.',
+      catatan: 'Jumlah peserta · briefing jelaskan skala 1–10'
     },
     3: {
       icon: 'i-seat',
       title: 'Mencoba seluruh 10 kursi',
       sub: 'Supaya setiap peserta menilai seluruh pilihan kursi',
-      durasi: 'Sekitar 3 menit per kursi',
+      durasi: 'Sekitar 5 menit per kursi',
       instruksi: 'Duduk dalam posisi wajar seperti saat mengendarai, lalu naik ke kursi berikutnya.',
       catatan: 'Urutan mencoba diacak untuk setiap peserta'
     },
@@ -279,7 +279,7 @@
       icon: 'i-clock',
       title: 'Durasi duduk sama',
       sub: 'Supaya perbandingan tidak dipengaruhi oleh lama duduk',
-      durasi: '3 menit tiap kursi',
+      durasi: '5 menit tiap kursi',
       instruksi: 'Gunakan pengatur waktu yang sama untuk semua peserta dan semua kursi.',
       catatan: 'Tidak ada jeda atau penyesuaian waktu antar kursi'
     },
@@ -295,7 +295,7 @@
       icon: 'i-clipboard',
       title: 'Nilai dicatat',
       sub: 'Supaya hasil dapat dihitung rata-ratanya',
-      durasi: 'Setelah tiap sesi selesai',
+      durasi: 'Sekitar 5 menit setelah sesi selesai',
       instruksi: 'Catat nilai pada lembar peserta, satu baris untuk setiap peserta.',
       catatan: '10 nilai per peserta, satu untuk setiap kursi'
     }
