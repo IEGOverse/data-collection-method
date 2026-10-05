@@ -5,10 +5,11 @@
      2. Deck      — slide engine (navigation, keyboard, progress, scaling)
      3. SeatWall  — 10 seat glyphs
      4. Methods   — slide 3 clickable cards
-     5. Rating    — slide 4 scale 1-10
-     6. Table     — slide 7 records + Show Average
-     7. Charts    — slide 8 & 9 vanilla bar charts
-     8. Modal     — slide 9 seat details
+     5. FlowSteps — slide 5 clickable cards + protocol detail
+     6. Rating    — slide 4 scale 1-10
+     7. Table     — slide 7 records + Show Average
+     8. Charts    — slide 8 & 9 vanilla bar charts
+     9. Modal     — slide 9 seat details
    ========================================================================== */
 (function () {
   'use strict';
@@ -148,6 +149,7 @@
       var onButton = e.target && e.target.closest && e.target.closest('button');
       var k = e.key;
 
+      if (k === 'Escape') { Flow.deselect(); return; }
       if (k === 'ArrowRight' || k === 'PageDown' || k === 'ArrowDown') { next(); e.preventDefault(); }
       else if (k === 'ArrowLeft' || k === 'PageUp' || k === 'ArrowUp') { prev(); e.preventDefault(); }
       else if (k === ' ' && !onButton) { next(); e.preventDefault(); }
@@ -246,7 +248,111 @@
   })();
 
   /* ----------------------------------------------------------------------
-     5. RATING SCALE — hover / click 1-10
+     5. FLOW STEPS - slide 5 clickable cards + protocol detail panel
+     ---------------------------------------------------------------------- */
+  var FLOW_STEPS = {
+    1: {
+      icon: 'i-seat',
+      title: 'Siapkan 10 desain kursi',
+      sub: 'Supaya setiap kursi dapat diidentifikasi dan dibandingkan',
+      durasi: 'Sekali di awal sesi',
+      instruksi: 'Beri nomor 1 sampai dengan 10 dan letakkan pada posisi yang sama.',
+      catatan: 'Nomor urut desain kursi'
+    },
+    2: {
+      icon: 'i-users',
+      title: 'Peserta dipilih',
+      sub: 'Supaya semua peserta menilai dengan kriteria yang sama',
+      durasi: 'Sekitar 5 menit per peserta',
+      instruksi: 'Sampaikan bahwa nilai 1 sampai 10 bersifat pribadi dan tidak ada jawaban benar atau salah.',
+      catatan: 'Jumlah peserta yang mengikuti'
+    },
+    3: {
+      icon: 'i-seat',
+      title: 'Mencoba seluruh 10 kursi',
+      sub: 'Supaya setiap peserta menilai seluruh pilihan kursi',
+      durasi: 'Sekitar 3 menit per kursi',
+      instruksi: 'Duduk dalam posisi wajar seperti saat mengendarai, lalu naik ke kursi berikutnya.',
+      catatan: 'Urutan mencoba diacak untuk setiap peserta'
+    },
+    4: {
+      icon: 'i-clock',
+      title: 'Durasi duduk sama',
+      sub: 'Supaya perbandingan tidak dipengaruhi oleh lama duduk',
+      durasi: '3 menit tiap kursi',
+      instruksi: 'Gunakan pengatur waktu yang sama untuk semua peserta dan semua kursi.',
+      catatan: 'Tidak ada jeda atau penyesuaian waktu antar kursi'
+    },
+    5: {
+      icon: 'i-list',
+      title: 'Memberi nilai 1 sampai 10',
+      sub: 'Supaya setiap kursi punya satu angka yang jelas',
+      durasi: 'Sekitar 30 detik per kursi',
+      instruksi: 'Beri satu nilai untuk setiap kursi, sesaat setelah waktu duduk selesai.',
+      catatan: 'Skor kenyamanan 1 sampai 10'
+    },
+    6: {
+      icon: 'i-clipboard',
+      title: 'Nilai dicatat',
+      sub: 'Supaya hasil dapat dihitung rata-ratanya',
+      durasi: 'Setelah tiap sesi selesai',
+      instruksi: 'Catat nilai pada lembar peserta, satu baris untuk setiap peserta.',
+      catatan: '10 nilai per peserta, satu untuk setiap kursi'
+    }
+  };
+
+  var Flow = (function () {
+    var list = $('#flowSteps');
+    var panel = $('#flowDetail');
+    if (!list || !panel) return { init: function () {}, deselect: function () {} };
+
+    var dIcon = $('#flowDetail .flow-detail-icon use');
+    var dTitle = $('#flowDetailTitle');
+    var dSub = $('#flowDetailSub');
+    var dDurasi = $('#fdDurasi');
+    var dInstruksi = $('#fdInstruksi');
+    var dCatatan = $('#fdCatatan');
+
+    var IDLE = {
+      icon: 'i-info',
+      title: 'Klik salah satu kartu di atas',
+      sub: 'Setiap peserta mencoba seluruh 10 kursi dengan durasi dan kondisi ruangan yang sama.'
+    };
+
+    function select(n) {
+      var s = (n && FLOW_STEPS[n]) || null;
+      $$('.flow-step', list).forEach(function (li) {
+        var btn = li.querySelector('.flow-btn');
+        var on = !!s && !!btn && btn.getAttribute('data-step') === String(n);
+        li.classList.toggle('is-active', on);
+        if (btn) btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+      });
+      var d = s || IDLE;
+      dIcon.setAttribute('href', '#' + d.icon);
+      dTitle.textContent = d.title;
+      dSub.textContent = d.sub;
+      dDurasi.textContent = s ? s.durasi : '';
+      dInstruksi.textContent = s ? s.instruksi : '';
+      dCatatan.textContent = s ? s.catatan : '';
+      panel.classList.toggle('is-idle', !s);
+    }
+
+    list.addEventListener('click', function (e) {
+      var btn = e.target.closest ? e.target.closest('.flow-btn') : null;
+      if (!btn) return;
+      var li = btn.closest('.flow-step');
+      select(li && li.classList.contains('is-active') ? null : btn.getAttribute('data-step'));
+    });
+
+    return {
+      init: function () { select(null); },
+      select: select,
+      deselect: function () { select(null); }
+    };
+  })();
+
+  /* ----------------------------------------------------------------------
+     6. RATING SCALE - hover / click 1-10
      ---------------------------------------------------------------------- */
   var Rating = (function () {
     var scale = $('#ratingScale');
@@ -284,7 +390,7 @@
   })();
 
   /* ----------------------------------------------------------------------
-     6. TABLE — records + Show Average
+     7. TABLE — records + Show Average
      ---------------------------------------------------------------------- */
   var Table = (function () {
     var tbody = $('#dataTableBody');
@@ -332,7 +438,7 @@
   })();
 
   /* ----------------------------------------------------------------------
-     7. CHARTS — vanilla bar charts
+     8. CHARTS — vanilla bar charts
      ---------------------------------------------------------------------- */
   var CHART_MIN = 4;   // baseline of the axis
   var CHART_MAX = 10;
@@ -372,7 +478,7 @@
   }
 
   /* ----------------------------------------------------------------------
-     8. MODAL — seat details
+     9. MODAL — seat details
      ---------------------------------------------------------------------- */
   var modal = $('#modal');
   var selectedSeat = 0;   // 0 = belum ada pilihan manual
@@ -421,7 +527,7 @@
   });
 
   /* ----------------------------------------------------------------------
-     8. Modals close on backdrop click & Esc is handled in Deck.
+     9. Modals close on backdrop click & Esc is handled in Deck.
      ---------------------------------------------------------------------- */
 
   /* ----------------------------------------------------------------------
@@ -445,8 +551,9 @@
     buildSeatWall($('#seatWallProblem'), {});
     buildSeatWall($('#seatWallQA'), { lit: [3, 7] });
 
-    Methods.init();
-    Rating.init();
+  Methods.init();
+  Flow.init();
+  Rating.init();
     Table.init();
     renderFormulaExample();
 

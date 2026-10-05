@@ -235,40 +235,71 @@
 
       <ol class="flow" id="flowSteps">
         <li class="flow-step" style="--d:80ms">
-          <span class="flow-num">1</span>
-          <span class="flow-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-seat"/></svg></span>
-          <span class="flow-text">Siapkan 10 desain kursi</span>
+          <button class="flow-btn" type="button" data-step="1" aria-expanded="false" aria-controls="flowDetail">
+            <span class="flow-num">1</span>
+            <span class="flow-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-seat"/></svg></span>
+            <span class="flow-text">Siapkan 10 desain kursi</span>
+          </button>
         </li>
         <li class="flow-step" style="--d:170ms">
-          <span class="flow-num">2</span>
-          <span class="flow-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-users"/></svg></span>
-          <span class="flow-text">Peserta dipilih</span>
+          <button class="flow-btn" type="button" data-step="2" aria-expanded="false" aria-controls="flowDetail">
+            <span class="flow-num">2</span>
+            <span class="flow-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-users"/></svg></span>
+            <span class="flow-text">Peserta dipilih</span>
+          </button>
         </li>
         <li class="flow-step" style="--d:260ms">
-          <span class="flow-num">3</span>
-          <span class="flow-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-seat"/></svg></span>
-          <span class="flow-text">Mencoba seluruh 10 kursi</span>
+          <button class="flow-btn" type="button" data-step="3" aria-expanded="false" aria-controls="flowDetail">
+            <span class="flow-num">3</span>
+            <span class="flow-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-seat"/></svg></span>
+            <span class="flow-text">Mencoba seluruh 10 kursi</span>
+          </button>
         </li>
         <li class="flow-step" style="--d:350ms">
-          <span class="flow-num">4</span>
-          <span class="flow-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-clock"/></svg></span>
-          <span class="flow-text">Durasi duduk sama</span>
+          <button class="flow-btn" type="button" data-step="4" aria-expanded="false" aria-controls="flowDetail">
+            <span class="flow-num">4</span>
+            <span class="flow-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-clock"/></svg></span>
+            <span class="flow-text">Durasi duduk sama</span>
+          </button>
         </li>
         <li class="flow-step" style="--d:440ms">
-          <span class="flow-num">5</span>
-          <span class="flow-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-list"/></svg></span>
-          <span class="flow-text">Memberi nilai 1&ndash;10</span>
+          <button class="flow-btn" type="button" data-step="5" aria-expanded="false" aria-controls="flowDetail">
+            <span class="flow-num">5</span>
+            <span class="flow-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-list"/></svg></span>
+            <span class="flow-text">Memberi nilai 1&ndash;10</span>
+          </button>
         </li>
         <li class="flow-step" style="--d:530ms">
-          <span class="flow-num">6</span>
-          <span class="flow-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-clipboard"/></svg></span>
-          <span class="flow-text">Nilai dicatat</span>
+          <button class="flow-btn" type="button" data-step="6" aria-expanded="false" aria-controls="flowDetail">
+            <span class="flow-num">6</span>
+            <span class="flow-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-clipboard"/></svg></span>
+            <span class="flow-text">Nilai dicatat</span>
+          </button>
         </li>
       </ol>
 
-      <div class="note-bar note-bar-center anim" style="--d:620ms">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-info"/></svg>
-        <p>Setiap peserta mencoba <b>seluruh 10 kursi</b> dengan durasi dan kondisi ruangan yang sama.</p>
+      <div class="flow-detail" id="flowDetail" role="region" aria-live="polite" aria-label="Detail langkah eksperimen">
+        <div class="flow-detail-head">
+          <span class="flow-detail-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-info"/></svg></span>
+          <div class="flow-detail-title">
+            <h3 id="flowDetailTitle">Klik salah satu kartu di atas</h3>
+            <p class="flow-detail-sub" id="flowDetailSub">Setiap peserta mencoba seluruh 10 kursi dengan durasi dan kondisi ruangan yang sama.</p>
+          </div>
+        </div>
+        <dl class="flow-detail-grid">
+          <div class="fd-item">
+            <dt>Durasi</dt>
+            <dd id="fdDurasi"></dd>
+          </div>
+          <div class="fd-item">
+            <dt>Instruksi</dt>
+            <dd id="fdInstruksi"></dd>
+          </div>
+          <div class="fd-item">
+            <dt>Catatan</dt>
+            <dd id="fdCatatan"></dd>
+          </div>
+        </dl>
       </div>
     </section>
 
